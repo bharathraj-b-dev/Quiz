@@ -47,7 +47,7 @@
 <body>
 <div class="wrap">
   <h1>☕ Java MCQ Quiz</h1>
-  <div class="sub">Unit 3 &amp; Unit 4 question banks</div>
+  <div class="sub">Unit 3, Unit 4 &amp; Unit 5 question banks</div>
   <div id="app"></div>
 </div>
 <script src="questions.js"></script>
@@ -67,13 +67,14 @@ function fmtQ(q){
 }
 
 function home(){
-  const sel = state.units || ['unit3','unit4'];
+  const sel = state.units || ['unit3','unit4','unit5'];
   app.innerHTML = `
   <div class="card">
     <b>Choose units</b>
     <div class="chips" id="units">
       <span class="chip ${sel.includes('unit3')?'on':''}" data-u="unit3">Unit 3 (50)</span>
       <span class="chip ${sel.includes('unit4')?'on':''}" data-u="unit4">Unit 4 (50)</span>
+      <span class="chip ${sel.includes('unit5')?'on':''}" data-u="unit5">Unit 5 (50)</span>
     </div>
     <b>Number of questions</b>
     <div class="chips" id="counts">
@@ -102,7 +103,7 @@ function start(){
   state.shuffleOpts = document.getElementById('shufo').checked;
   state.instant = document.getElementById('instant').checked;
   let pool = [];
-  state.units.forEach(u=>QUESTIONS[u].forEach((q,i)=>pool.push({...q,unit:u==='unit3'?'Unit 3':'Unit 4',n:i+1})));
+  state.units.forEach(u=>QUESTIONS[u].forEach((q,i)=>pool.push({...q,unit:u==='unit3'?'Unit 3':u==='unit4'?'Unit 4':'Unit 5',n:i+1})));
   if(state.shuffle) pool = shuffle(pool);
   if(state.count!=='All') pool = pool.slice(0,+state.count);
   pool = pool.map(q=>{

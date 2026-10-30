@@ -1003,4 +1003,507 @@ const QUESTIONS = {
    "a": 0
   }
  ]
+,
+  "unit5": [
+  {
+    "q": "What happens when this code is compiled?\nStream<String> s = Stream.of(\"a\", \"b\");\nfor (String x : s) {\n    System.out.println(x);\n}",
+    "o": [
+      "It compiles and prints a and b in order",
+      "Compile-time error, because Stream does not implement Iterable",
+      "It compiles but throws IllegalStateException at runtime",
+      "It compiles but prints nothing, because the stream is lazy"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the main security advantage of PreparedStatement over Statement?",
+    "o": [
+      "It helps prevent SQL injection by treating parameter values as data, not as SQL code",
+      "It encrypts the data sent to the database",
+      "It automatically validates the SQL syntax at compile time",
+      "It removes the need to open a connection"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Which lambda expression is equivalent to this anonymous class?\nnew Thread(new Runnable() {\n    public void run() {\n        System.out.println(\"Hi\");\n    }\n});",
+    "o": [
+      "new Thread(() => System.out.println(\"Hi\"));",
+      "new Thread(run() -> System.out.println(\"Hi\"));",
+      "new Thread(() -> System.out.println(\"Hi\"));",
+      "new Thread(Runnable -> System.out.println(\"Hi\"));"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nList<Integer> list = Arrays.asList(3, 1, 2);\nlist.stream().sorted().forEach(x -> { });\nSystem.out.println(list);",
+    "o": [
+      "[3, 1, 2]",
+      "[1, 2, 3]",
+      "[3, 2, 1]",
+      "UnsupportedOperationException is thrown, because Arrays.asList() returns a fixed-size list"
+    ],
+    "a": 0
+  },
+  {
+    "q": "In the JDBC architecture, who supplies the classes that implement interfaces such as Connection, Statement and ResultSet?",
+    "o": [
+      "The database vendor or a third-party JDBC driver provider",
+      "The JDK itself, which ships implementations for every database",
+      "The application developer who writes the JDBC program",
+      "The JVM, which generates them at run time from the SQL text"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What does IntStream.empty().max() return?",
+    "o": [
+      "An empty OptionalInt",
+      "0",
+      "Integer.MIN_VALUE",
+      "It throws NoSuchElementException"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\n@FunctionalInterface\ninterface Decorator {\n    String decorate(String s);\n    default Decorator twice() { return s -> decorate(decorate(s)); }\n}\nDecorator d = s -> \"[\" + s + \"]\";\nSystem.out.println(d.twice().decorate(\"Bob\"));",
+    "o": [
+      "[Bob]",
+      "[Bob][Bob]",
+      "[[Bob]]",
+      "Compile-time error, because a functional interface cannot contain a default method"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nBiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;\nFunction<Integer, Integer> square = x -> x * x;\nSystem.out.println(add.andThen(square).apply(2, 3));",
+    "o": [
+      "13",
+      "10",
+      "Compile-time error, because a BiFunction cannot be chained with a Function",
+      "25"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What happens?\nStream.of(\"a\", \"bb\", \"a\").collect(Collectors.toMap(s -> s, String::length));",
+    "o": [
+      "The second a silently replaces the first, giving {a=1, bb=2}",
+      "IllegalStateException is thrown because of the duplicate key a",
+      "The values are merged into lists, giving {a=[1, 1], bb=[2]}",
+      "Compile-time error, because String::length cannot be used as a value mapper"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nclass Tag {\n    String n;\n    Tag(String n) { this.n = n; }\n}\nSystem.out.println(Stream.of(new Tag(\"x\"), new Tag(\"x\")).distinct().count());",
+    "o": [
+      "2",
+      "1",
+      "0",
+      "Compile-time error, because Tag does not implement Comparable"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Which of the following is a short-circuiting terminal operation?",
+    "o": [
+      "limit()",
+      "anyMatch()",
+      "skip()",
+      "peek()"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Which lambda is a valid Function<Integer, Integer> that doubles its argument using a block body?",
+    "o": [
+      "x -> { x * 2 }",
+      "x -> { return x * 2; }",
+      "x -> { x * 2; }",
+      "x -> return x * 2;"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nPredicate<String> isEmpty = String::isEmpty;\nSystem.out.println(isEmpty.negate().test(\"Java\"));",
+    "o": [
+      "false",
+      "Java",
+      "true",
+      "Compile-time error, because Predicate has no negate() method"
+    ],
+    "a": 2
+  },
+  {
+    "q": "From JDBC 4.0 onwards, what changed about loading drivers?",
+    "o": [
+      "Drivers can no longer be loaded manually",
+      "Drivers found on the classpath are loaded automatically through the service provider mechanism, so Class.forName() is usually not required",
+      "Every driver must be loaded with System.load()",
+      "Drivers are bundled inside the JDK"
+    ],
+    "a": 1
+  },
+  {
+    "q": "Is the @FunctionalInterface annotation required for an interface to be used as the target type of a lambda expression?",
+    "o": [
+      "Yes, without it the compiler rejects every lambda assigned to that interface",
+      "No, it is optional. Any interface with exactly one abstract method can be the target of a lambda; the annotation only makes the compiler enforce that rule",
+      "Yes, but only when the interface is generic",
+      "No, but without it the lambda is executed more slowly at runtime"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nMap<Boolean, List<Integer>> m = Stream.of(2, 4, 6)\n    .collect(Collectors.partitioningBy(x -> x > 10));\nSystem.out.println(m);",
+    "o": [
+      "{false=[2, 4, 6]}",
+      "{false=[2, 4, 6], true=[]}",
+      "{true=[2, 4, 6], false=[]}",
+      "{}"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(\"kiwi\", \"fig\", \"banana\", \"plum\")\n    .max(Comparator.comparing(String::length))\n    .get());",
+    "o": [
+      "6",
+      "fig",
+      "banana",
+      "plum"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(\"apple\", \"bat\", \"cherry\")\n    .filter(s -> s.length() > 3)\n    .map(String::toUpperCase)\n    .collect(Collectors.toList()));",
+    "o": [
+      "[APPLE, BAT, CHERRY]",
+      "[apple, cherry]",
+      "[APPLE, CHERRY]",
+      "[BAT]"
+    ],
+    "a": 2
+  },
+  {
+    "q": "In which order should JDBC resources be closed when closing them manually?",
+    "o": [
+      "Connection, then Statement, then ResultSet",
+      "Statement, then Connection, then ResultSet",
+      "ResultSet, then Statement, then Connection",
+      "The order does not matter at all"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(1, 2, 3).parallel().sequential().isParallel());",
+    "o": [
+      "false",
+      "true",
+      "It depends on the number of CPU cores",
+      "IllegalStateException is thrown, because the mode cannot be changed after parallel()"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\nStream.of(1, 2, 3).filter(x -> { System.out.print(\"F\"); return x > 1; });",
+    "o": [
+      "FFF",
+      "F",
+      "Nothing is printed",
+      "Compile-time error"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Which functional interface type does the Map.forEach() method accept as its argument?",
+    "o": [
+      "Consumer<Map.Entry<K, V>>",
+      "BiFunction<K, V, Void>",
+      "BiConsumer<? super K, ? super V>",
+      "BiPredicate<K, V>"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the result of this code?\nint count = 0;\nRunnable r = () -> count++;\nr.run();",
+    "o": [
+      "Compile-time error, because count must be final or effectively final",
+      "It compiles and count becomes 1",
+      "It compiles but throws an exception at runtime",
+      "It compiles and count remains 0"
+    ],
+    "a": 0
+  },
+  {
+    "q": "Which JDBC driver type is known as the native-API driver, because it converts JDBC calls into calls to the database vendor's client-side native library (C/C++)?",
+    "o": [
+      "Type 1",
+      "Type 2",
+      "Type 3",
+      "Type 4"
+    ],
+    "a": 1
+  },
+  {
+    "q": "A query is run as: SELECT id, name FROM emp\nWhich call correctly reads the name column of the current row of the ResultSet rs?",
+    "o": [
+      "rs.getString(0)",
+      "rs.getName()",
+      "rs.get(\"name\")",
+      "rs.getString(2)"
+    ],
+    "a": 3
+  },
+  {
+    "q": "Why is using a parallel stream to run a blocking network call for every element considered a pitfall?",
+    "o": [
+      "Each element is given a brand-new thread, which quickly exhausts system memory",
+      "Network calls are not permitted inside lambda expressions",
+      "The tasks run in the shared common ForkJoinPool, so blocked threads can starve other parallel work in the same JVM",
+      "The results of a parallel stream cannot be collected into a List"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(1, 2, 3, 4, 5, 6)\n    .limit(4)\n    .skip(2)\n    .collect(Collectors.toList()));",
+    "o": [
+      "[3, 4, 5, 6]",
+      "[3, 4]",
+      "[5, 6]",
+      "[1, 2]"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(\"ant\", \"bee\", \"ape\", \"bat\")\n    .collect(Collectors.groupingBy(\n        s -> s.charAt(0),\n        Collectors.mapping(s -> s.substring(1), Collectors.toList()))));",
+    "o": [
+      "{a=[nt, pe], b=[ee, at]}",
+      "{a=[ant, ape], b=[bee, bat]}",
+      "{a=2, b=2}",
+      "{a=[t, e], b=[e, t]}"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\nFunction<String, StringBuilder> f = StringBuilder::new;\nSystem.out.println(f.apply(\"abc\").reverse());",
+    "o": [
+      "abc",
+      "An empty string, because the constructor reference ignores the argument",
+      "Compile-time error, because a constructor cannot be used in a method reference",
+      "cba"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(\"a\", \"b\", \"c\").reduce(\"X\", (x, y) -> x + y));",
+    "o": [
+      "abc",
+      "abcX",
+      "XaXbXc",
+      "Xabc"
+    ],
+    "a": 3
+  },
+  {
+    "q": "Which of the following is NOT a valid use of a ? placeholder in a PreparedStatement?",
+    "o": [
+      "SELECT * FROM emp WHERE id = ?",
+      "INSERT INTO emp(id, name) VALUES (?, ?)",
+      "UPDATE emp SET name = ? WHERE id = ?",
+      "SELECT * FROM ? WHERE id = 1"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What is the result of this code?\nint x = 5;\nFunction<Integer, Integer> f = x -> x * 2;\nSystem.out.println(f.apply(3));",
+    "o": [
+      "It prints 6",
+      "Compile-time error, because the lambda parameter x redeclares a local variable that is already defined",
+      "It prints 10",
+      "It throws a RuntimeException"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(\"a\", \"bb\", \"c\")\n    .collect(Collectors.toMap(s -> s.length(), s -> s, (x, y) -> x + \"|\" + y)));",
+    "o": [
+      "{1=c, 2=bb}",
+      "{1=a, 2=bb}",
+      "IllegalStateException is thrown because of the duplicate key 1",
+      "{1=a|c, 2=bb}"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What is the output?\nStream.of(\"a\", \"b\", \"c\")\n      .map(s -> { System.out.print(s); return s.toUpperCase(); })\n      .forEach(s -> System.out.print(s));",
+    "o": [
+      "abcABC",
+      "aAbBcC",
+      "ABCabc",
+      "AaBbCc"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What is the output?\nConsumer<String> c1 = s -> System.out.print(s + \"1\");\nConsumer<String> c2 = s -> System.out.print(s + \"2\");\nc1.andThen(c2).accept(\"A\");",
+    "o": [
+      "A1A2",
+      "A2A1",
+      "A1",
+      "A12"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What happens when this code runs and no registered JDBC driver accepts the URL?\nConnection con = DriverManager.getConnection(\n    \"jdbc:xyz://localhost/db\", \"user\", \"pass\");",
+    "o": [
+      "A ClassNotFoundException is thrown",
+      "null is returned instead of a Connection",
+      "An IllegalArgumentException is thrown",
+      "A SQLException with the message \"No suitable driver found\" is thrown"
+    ],
+    "a": 3
+  },
+  {
+    "q": "Which task is the best candidate for a parallel stream?",
+    "o": [
+      "Applying an expensive, independent calculation to every element of a large ArrayList",
+      "Printing the elements of a 5-element list",
+      "Computing a running total in which each step depends on the previous result",
+      "Running a pipeline whose lambda increments a shared non-atomic counter"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(1, 2, 3)\n    .flatMap(x -> Stream.of(x, x * 10))\n    .collect(Collectors.toList()));",
+    "o": [
+      "[1, 2, 3, 10, 20, 30]",
+      "[[1, 10], [2, 20], [3, 30]]",
+      "[10, 20, 30]",
+      "[1, 10, 2, 20, 3, 30]"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What happens when @FunctionalInterface is applied to an interface that declares two abstract methods?",
+    "o": [
+      "A runtime exception occurs",
+      "Only a warning is shown",
+      "The annotation is silently ignored",
+      "A compile-time error occurs"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(IntStream.of(1, 2, 3, 4).average().getAsDouble());",
+    "o": [
+      "2.0",
+      "10.0",
+      "2.5",
+      "OptionalDouble[2.5]"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Which statement about a lambda expression and an anonymous inner class is correct?",
+    "o": [
+      "A lambda can extend an abstract class, whereas an anonymous class can only implement interfaces",
+      "A lambda can declare its own instance fields, whereas an anonymous class cannot",
+      "Both a lambda and an anonymous class can implement an interface with any number of abstract methods",
+      "A lambda can implement only a functional interface, whereas an anonymous class can also implement an interface with several abstract methods or extend a class"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What is the output?\nSupplier<String> s = () -> { System.out.print(\"X\"); return \"ok\"; };\nSystem.out.print(\"A\");\nSystem.out.println(s.get());",
+    "o": [
+      "XAok",
+      "AXok",
+      "Aok",
+      "XAXok"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What happens when this code is compiled and run?\nSystem.out.println(Stream.of(1, 2, 3).collect(Collectors.joining(\",\")));",
+    "o": [
+      "Compile-time error, because joining() works only on a stream of CharSequence elements",
+      "It prints 1,2,3",
+      "It prints [1,2,3]",
+      "ClassCastException is thrown at runtime"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\nIntSummaryStatistics st = IntStream.of(4, 8, 6).summaryStatistics();\nSystem.out.println(st.getMin() + \" \" + st.getMax() + \" \" + st.getSum());",
+    "o": [
+      "4 8 3",
+      "4 8 6",
+      "4 8 18",
+      "4 6 18"
+    ],
+    "a": 2
+  },
+  {
+    "q": "Compared with DriverManager, why is javax.sql.DataSource generally preferred for obtaining connections in production applications?",
+    "o": [
+      "It removes the need for a JDBC driver",
+      "It can be backed by a connection pool, and its configuration can be kept outside the application code",
+      "It automatically rewrites SQL so that it works on every database",
+      "It executes SQL statements faster than the Statement interface"
+    ],
+    "a": 1
+  },
+  {
+    "q": "What kind of method reference is String::toUpperCase?",
+    "o": [
+      "A reference to a static method",
+      "A reference to an instance method of a particular object",
+      "A reference to a constructor",
+      "A reference to an instance method of an arbitrary object of a particular type"
+    ],
+    "a": 3
+  },
+  {
+    "q": "What does Statement.execute() return when the SQL string is an UPDATE statement?",
+    "o": [
+      "false, because the result is an update count and not a ResultSet",
+      "true, because the statement ran successfully",
+      "The number of rows updated, as an int",
+      "A ResultSet containing the updated rows"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the risk in this code?\nList<Integer> result = new ArrayList<>();\nIntStream.range(0, 1000).parallel().forEach(result::add);",
+    "o": [
+      "The non-thread-safe ArrayList may lose elements or throw an exception because of a race condition",
+      "There is no risk, since parallel streams make the list thread-safe",
+      "The code will not compile",
+      "The stream is automatically converted to a sequential stream"
+    ],
+    "a": 0
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.iterate(1, x -> x * 2)\n    .limit(5)\n    .collect(Collectors.toList()));",
+    "o": [
+      "[2, 4, 8, 16, 32]",
+      "[1, 2, 3, 4, 5]",
+      "[1, 2, 4, 8, 16]",
+      "The program never finishes, because iterate() creates an infinite stream"
+    ],
+    "a": 2
+  },
+  {
+    "q": "What is the output?\nSystem.out.println(Stream.of(5, 3, 5, 1, 3).distinct().sorted().limit(2).collect(Collectors.toList()));",
+    "o": [
+      "[5, 3]",
+      "[1, 3, 5]",
+      "[1, 1]",
+      "[1, 3]"
+    ],
+    "a": 3
+  }
+]
 };
